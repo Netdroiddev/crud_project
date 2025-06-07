@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f0f9f0 0%, #e6f4e6 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .form-section {
+            background: linear-gradient(to bottom, #ffffff 0%, #f5fbf5 100%);
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .input-field:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #43a047 0%, #1b5e20 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+            transform: translateY(-2px);
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid #4caf50;
+        }
+        
+        .floating-label {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .floating-label input, 
+        .floating-label select, 
+        .floating-label textarea {
+            padding-top: 20px;
+            height: 60px;
+        }
+        
+        .floating-label textarea {
+            height: auto;
+            min-height: 120px;
+        }
+        
+        .floating-label label {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            color: #757575;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+        
+        .floating-label input:focus + label, 
+        .floating-label input:not(:placeholder-shown) + label,
+        .floating-label select:focus + label,
+        .floating-label select:not(:placeholder-shown) + label,
+        .floating-label textarea:focus + label,
+        .floating-label textarea:not(:placeholder-shown) + label {
+            top: 5px;
+            font-size: 0.75rem;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #c8e6c9;
+            color: #2e7d32;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step.active {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .step-line {
+            height: 3px;
+            background: #e0e0e0;
+            flex-grow: 1;
+            position: relative;
+            top: 16px;
+        }
+        
+        .step-line.active {
+            background: #4caf50;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #a5d6a7 0%, #4caf50 100%);
+            width: 25%;
+            transition: width 0.5s ease;
+        }
+        
+        .form-field {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            background-color: #fff;
+            transition: all 0.3s;
+        }
+        
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .database-info {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid #4caf50;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        /* Nuevos estilos para mensajes de éxito/error */
+        .success-message {
+            background-color: #d1fae5;
+            border: 1px solid #10b981;
+            color: #047857;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+        }
+        
+        .error-message-container {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #b91c1c;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast.success {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        }
+        
+        .toast.error {
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+        }
+        
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #fff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8">
+    <div class="container mx-auto px-4 max-w-5xl">
+        <!-- Encabezado -->
+        <div class="form-header rounded-xl mb-8 overflow-hidden">
+            <div class="px-8 py-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">
+                            <i class="fas fa-file-medical mr-3"></i>Formulario de Registro de Atención
+                        </h1>
+                        <p class="text-green-100 mt-2">Complete todos los campos requeridos para registrar la atención médica</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-3 rounded-full">
+                        <i class="fas fa-hospital-user text-white text-2xl"></i>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <div class="text-green-100 mb-2 flex justify-between">
+                        <span>Progreso del formulario</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" id="form-progress" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Indicador de pasos -->
+        <div class="step-indicator">
+            <div class="step active">1</div>
+            <div class="step-line active"></div>
+            <div class="step active">2</div>
+            <div class="step-line"></div>
+            <div class="step">3</div>
+            <div class="step-line"></div>
+            <div class="step">4</div>
+            <div class="step-line"></div>
+            <div class="step">5</div>
+        </div>
+        
+        <!-- Mensajes de éxito/error -->
+        <div id="success-message" class="success-message">
+            <i class="fas fa-check-circle mr-2"></i>¡Registro guardado exitosamente!
+        </div>
+        
+        <div id="error-message" class="error-message-container">
+            <i class="fas fa-exclamation-circle mr-2"></i><span id="error-text">Por favor complete todos los campos requeridos</span>
+        </div>
+        
+        <!-- Toast notification -->
+        <div id="toast" class="toast">
+            <i class="fas fa-check-circle mr-2"></i><span id="toast-message">Mensaje de éxito</span>
+        </div>
+        
+        <form id="medical-form" class="space-y-6">
+            <!-- Sección 1: Información del profesional -->
+            <div class="form-section">
+                <div class="section-header px-6 py-4">
+                    <h2 class="text-xl font-semibold">
+                        <i class="fas fa-user-md mr-2"></i>Información del Profesional
+                    </h2>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="floating-label">
+                            <input type="text" id="professional" name="professional" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="professional">Profesional que digita la información</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="date" id="elaboration_date" name="elaboration_date" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="elaboration_date">Fecha de elaboración</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <select id="regime" name="regime" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                    placeholder=" " required>
+                                <option value=""></option>
+                                <option value="Subsidiado">Subsidiado</option>
+                                <option value="Contributivo">Contributivo</option>
+                                <option value="Especial o de Excepción">Especial o de Excepción</option>
+                                <option value="No asegurado">No asegurado</option>
+                            </select>
+                            <label for="regime">Régimen</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="date" id="attention_date" name="attention_date" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="attention_date">Fecha de atención</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 2: Información del paciente -->
+            <div class="form-section">
+                <div class="section-header px-6 py-4">
+                    <h2 class="text-xl font-semibold">
+                        <i class="fas fa-user-injured mr-2"></i>Información del Paciente
+                    </h2>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="floating-label">
+                            <select id="identification_type" name="identification_type" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                                <option value=""></option>
+                                <option value="Cédula">Cédula</option>
+                                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                                <option value="Cédula Extranjera">Cédula Extranjera</option>
+                            </select>
+                            <label for="identification_type">Tipo de identificación</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="number" id="identification_number" name="identification_number" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="identification_number">Número de identificación</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="first_surname" name="first_surname" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="first_surname">Primer apellido</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="second_surname" name="second_surname" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" ">
+                            <label for="second_surname">Segundo apellido</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="first_name" name="first_name" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="first_name">Primer nombre</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="second_name" name="second_name" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" ">
+                            <label for="second_name">Segundo nombre</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="date" id="birth_date" name="birth_date" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="birth_date">Fecha de nacimiento</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <select id="gender" name="gender" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                    placeholder=" " required>
+                                <option value=""></option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <label for="gender">Sexo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 3: Datos demográficos -->
+            <div class="form-section">
+                <div class="section-header px-6 py-4">
+                    <h2 class="text-xl font-semibold">
+                        <i class="fas fa-globe-americas mr-2"></i>Datos Demográficos
+                    </h2>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="floating-label">
+                            <select id="population_group" name="population_group" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                    placeholder=" " required>
+                                <option value=""></option>
+                                <option value="Indigentes">Indigentes</option>
+                                <option value="Población infantil vulnerable bajo protección en instituciones diferentes a ICBF">Población infantil vulnerable bajo protección en instituciones diferentes a ICBF</option>
+                                <option value="Personas incluidas en el programa de protección a testigos">Personas incluidas en el programa de protección a testigos</option>
+                                <option value="Población en centros psiquiátricos">Población en centros psiquiátricos</option>
+                                <option value="Población rural migratoria">Población rural migratoria</option>
+                                <option value="Población en centros carcelarios">Población en centros carcelarios</option>
+                                <option value="Población rural no migratoria">Población rural no migratoria</option>
+                                <option value="Adultos mayores en centros de protección">Adultos mayores en centros de protección</option>
+                                <option value="Comunidades indígenas">Comunidades indígenas</option>
+                                <option value="Población ROM">Población ROM</option>
+                                <option value="Negro(a), mulato(a), afrocolombiano(a) o afrodescendiente">Negro(a), mulato(a), afrocolombiano(a) o afrodescendiente</option>
+                                <option value="Población infantil a cargo del ICBF">Población infantil a cargo del ICBF</option>
+                                <option value="Grupo poblacional no definido">Grupo poblacional no definido</option>
+                                <option value="Madres comunitarias">Madres comunitarias</option>
+                                <option value="Artistas, autores, compositores">Artistas, autores, compositores</option>
+                                <option value="Otro grupo poblacional">Otro grupo poblacional</option>
+                                <option value="Menores desvinculados del conflicto armado bajo protección del ICBF">Menores desvinculados del conflicto armado bajo protección del ICBF</option>
+                                <option value="Población discapacitada">Población discapacitada</option>
+                            </select>
+                            <label for="population_group">Grupo poblacional</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <select id="ethnicity" name="ethnicity" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                    placeholder=" " required>
+                                <option value=""></option>
+                                <option value="1">Indígena</option>
+                                <option value="2">ROM (gitano)</option>
+                                <option value="3">Raizal (archipiélago de San Andrés y Providencia)</option>
+                                <option value="4">Palenquero de San Basilio</option>
+                                <option value="5">Negro(a), Mulato(a), Afrocolombiano(a) o Afrodescendiente</option>
+                                <option value="6">Otras Etnias</option>
+                                <option value="Z">Sin identificar por BDUA</option>
+                            </select>
+                            <label for="ethnicity">Pertenencia étnica</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="country" name="country" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="country">País de origen</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 4: Ubicación y contacto -->
+            <div class="form-section">
+                <div class="section-header px-6 py-4">
+                    <h2 class="text-xl font-semibold">
+                        <i class="fas fa-map-marker-alt mr-2"></i>Ubicación y Contacto
+                    </h2>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="floating-label">
+                            <input type="text" id="territorial_zone_code" name="territorial_zone_code" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="territorial_zone_code">Código de zona territorial o residencia</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="address" name="address" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="address">Dirección</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="number" id="phone" name="phone" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="phone">Teléfono</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="neighborhood" name="neighborhood" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="neighborhood">Barrio / comunidad</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="microterritory" name="microterritory" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="microterritory">Microterritorio</label>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <input type="text" id="subcode" name="subcode" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                   placeholder=" " required>
+                            <label for="subcode">Subcódigo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 5: Información de la atención -->
+            <div class="form-section">
+                <div class="section-header px-6 py-4">
+                    <h2 class="text-xl font-semibold">
+                        <i class="fas fa-stethoscope mr-2"></i>Información de la Atención
+                    </h2>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="floating-label">
+                            <textarea id="intervention_description" name="intervention_description" rows="4"
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                      placeholder=" " required></textarea>
+                            <label for="intervention_description">Descripción de la intervención</label>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="floating-label">
+                                <input type="text" id="strategy_name" name="strategy_name" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                       placeholder=" " required>
+                                <label for="strategy_name">Nombre de la estrategia</label>
+                            </div>
+                            
+                            <div class="floating-label">
+                                <input type="text" id="health_priority" name="health_priority" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                       placeholder=" " required>
+                                <label for="health_priority">Prioridad en salud</label>
+                            </div>
+                            
+                            <div class="floating-label">
+                                <select id="basic_team" name="basic_team" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                        placeholder=" " required>
+                                    <option value=""></option>
+                                    <option value="EBS #4">EBS #4</option>
+                                    <option value="EBS #5">EBS #5</option>
+                                    <option value="EBS #6">EBS #6</option>
+                                </select>
+                                <label for="basic_team">Equipo básico</label>
+                            </div>
+                            
+                            <div class="floating-label">
+                                <input type="text" id="environment" name="environment" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                       placeholder=" " required>
+                                <label for="environment">Entorno</label>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-label">
+                            <textarea id="observation" name="observation" rows="4"
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg input-field focus:outline-none"
+                                      placeholder=" "></textarea>
+                            <label for="observation">Observación</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nota sobre responsividad -->
+            <div class="info-card rounded-lg p-5">
+                <div class="flex items-start">
+                    <div class="bg-green-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-mobile-alt text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2 text-green-800">Formulario completamente responsive</h3>
+                        <p class="text-gray-700">Este formulario se adapta automáticamente a diferentes tamaños de pantalla. 
+                        En dispositivos móviles se muestra en una sola columna, mientras que en tablets y 
+                        escritorio se organiza en dos columnas para una mejor experiencia de usuario.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-end gap-4 mt-8">
+                <button type="reset" class="btn-secondary px-6 py-3 text-gray-700 rounded-lg transition flex items-center justify-center">
+                    <i class="fas fa-times-circle mr-2"></i>Cancelar
+                </button>
+                <button type="submit" id="submit-button" class="btn-primary px-6 py-3 text-white rounded-lg transition flex items-center justify-center">
+                    <i class="fas fa-save mr-2"></i>
+                    <span id="submit-text">Guardar Registro</span>
+                    <div id="submit-spinner" class="spinner"></div>
+                </button>
+            </div>
+        </form>
+        
+        <!-- Información sobre la base de datos -->
+        <div class="database-info">
+            <div class="flex items-start">
+                <div class="bg-green-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-database text-green-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-2 text-green-800">Almacenamiento en Base de Datos</h3>
+                    <p class="text-gray-700">La información ingresada en este formulario se almacena de forma segura en una base de datos SQL mediante Django.</p>
+                    <p class="text-gray-700 mt-2">El envío se realiza mediante AJAX para una experiencia de usuario fluida.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Aplicar fecha actual como valor predeterminado para campos de fecha
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('elaboration_date').value = today;
+            document.getElementById('attention_date').value = today;
+            
+            // Establecer fecha de nacimiento hace 30 años por defecto
+            const birthDate = new Date();
+            birthDate.setFullYear(birthDate.getFullYear() - 30);
+            document.getElementById('birth_date').value = birthDate.toISOString().split('T')[0];
+            
+            // Añadir placeholders vacíos para etiquetas flotantes
+            const floatingInputs = document.querySelectorAll('.floating-label input, .floating-label select, .floating-label textarea');
+            floatingInputs.forEach(input => {
+                input.setAttribute('placeholder', ' ');
+            });
+            
+            // Actualizar el progreso al interactuar con el formulario
+            const formFields = document.querySelectorAll('input, select, textarea');
+            const progressElement = document.getElementById('form-progress');
+            const progressText = document.getElementById('progress-percentage');
+            
+            function updateProgress() {
+                let completed = 0;
+                formFields.forEach(field => {
+                    if ((field.type !== 'button' && field.type !== 'submit' && field.type !== 'reset') && 
+                        (field.value !== '' || (field.tagName === 'SELECT' && field.selectedIndex > 0))) {
+                        completed++;
+                    }
+                });
+                
+                const progress = Math.min(100, Math.round((completed / formFields.length) * 100));
+                progressElement.style.width = `${progress}%`;
+                progressText.textContent = `${progress}%`;
+            }
+            
+            // Inicializar el progreso
+            updateProgress();
+            
+            // Actualizar al cambiar cualquier campo
+            formFields.forEach(field => {
+                field.addEventListener('input', updateProgress);
+                field.addEventListener('change', updateProgress);
+            });
+            
+            // Función para mostrar notificaciones toast
+            function showToast(message, isSuccess = true) {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
+                
+                toastMessage.textContent = message;
+                toast.className = isSuccess ? 'toast success' : 'toast error';
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Validar y enviar el formulario
+            const form = document.getElementById('medical-form');
+            const submitButton = document.getElementById('submit-button');
+            const submitText = document.getElementById('submit-text');
+            const submitSpinner = document.getElementById('submit-spinner');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Validar campos requeridos
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('[required]');
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = '#ef4444';
+                    } else {
+                        field.style.borderColor = '#cbd5e0';
+                    }
+                });
+                
+                if (!isValid) {
+                    errorText.textContent = 'Por favor complete todos los campos requeridos';
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    showToast('Por favor complete todos los campos requeridos', false);
+                    return;
+                }
+                
+                // Mostrar spinner de carga
+                submitText.textContent = 'Guardando...';
+                submitSpinner.style.display = 'block';
+                submitButton.disabled = true;
+                
+                try {
+                    // Recolectar los datos del formulario
+                    const formData = new FormData(form);
+                    const formDataObject = Object.fromEntries(formData.entries());
+                    
+                    // Enviar los datos al backend usando fetch
+                    const response = await fetch('{% url "registro_atencion" %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCSRFToken(),  // Obtener token CSRF
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify(formDataObject)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok && data.status === 'success') {
+                        // Mostrar mensaje de éxito
+                        successMessage.style.display = 'block';
+                        errorMessage.style.display = 'none';
+                        showToast(data.message || '¡Registro guardado exitosamente!');
+                        
+                        // Resetear el formulario después de un éxito
+                        setTimeout(() => {
+                            form.reset();
+                            updateProgress();
+                            successMessage.style.display = 'none';
+                        }, 3000);
+                    } else {
+                        // Manejar errores del backend
+                        throw new Error(data.message || 'Error al guardar el registro');
+                    }
+                } catch (error) {
+                    // Mostrar mensaje de error
+                    errorText.textContent = error.message;
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    showToast(error.message, false);
+                } finally {
+                    // Restaurar el botón de enviar
+                    submitText.textContent = 'Guardar Registro';
+                    submitSpinner.style.display = 'none';
+                    submitButton.disabled = false;
+                }
+            });
+            
+            // Función para obtener el token CSRF de Django
+            function getCSRFToken() {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, 10) === 'csrftoken=') {
+                            cookieValue = decodeURIComponent(cookie.substring(10));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            
+            // Botón de cancelar
+            const resetButton = document.querySelector('button[type="reset"]');
+            resetButton.addEventListener('click', function() {
+                // Confirmar antes de resetear
+                if (confirm('¿Está seguro de que desea cancelar? Se perderán todos los datos ingresados.')) {
+                    form.reset();
+                    updateProgress();
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                    
+                    // Restablecer estilos de validación
+                    const requiredFields = form.querySelectorAll('[required]');
+                    requiredFields.forEach(field => {
+                        field.style.borderColor = '#cbd5e0';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

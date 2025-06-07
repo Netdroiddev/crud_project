@@ -1,0 +1,48 @@
+{% extends 'crud_app/base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Registros de Atención</h1>
+    
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+            <thead class="bg-indigo-600 text-white">
+                <tr>
+                    <th class="py-3 px-4 text-left">ID</th>
+                    <th class="py-3 px-4 text-left">Paciente</th>
+                    <th class="py-3 px-4 text-left">Identificación</th>
+                    <th class="py-3 px-4 text-left">Fecha Atención</th>
+                    <th class="py-3 px-4 text-left">Profesional</th>
+                    <th class="py-3 px-4 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for registro in registros %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4">{{ registro.id }}</td>
+                    <td class="py-3 px-4">{{ registro.primer_nombre }} {{ registro.primer_apellido }}</td>
+                    <td class="py-3 px-4">{{ registro.tipo_identificacion }}: {{ registro.numero_identificacion }}</td>
+                    <td class="py-3 px-4">{{ registro.fecha_atencion }}</td>
+                    <td class="py-3 px-4">{{ registro.profesional }}</td>
+                    <td class="py-3 px-4">
+                        <a href="{% url 'detalle_registro' registro.id %}" class="text-indigo-600 hover:text-indigo-900">
+                            <i class="fas fa-eye mr-2"></i>Ver
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="py-4 px-4 text-center text-gray-500">No hay registros disponibles</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="mt-6">
+        <a href="{% url 'registro_atencion' %}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+            <i class="fas fa-plus-circle mr-2"></i>Nuevo Registro
+        </a>
+    </div>
+</div>
+{% endblock %}

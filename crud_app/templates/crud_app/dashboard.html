@@ -1,0 +1,389 @@
+{% extends 'crud_app/base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+            <!-- Encabezado -->
+            <div class="bg-indigo-600 px-6 py-4">
+                <h1 class="text-2xl font-bold text-white">
+                    <i class="fas fa-file-medical mr-2"></i>Formulario de Registro de Atención
+                </h1>
+            </div>
+            
+            <!-- Formulario -->
+            <form class="p-6">
+                <!-- Sección 1: Información del profesional -->
+                <div class="mb-8 p-4 bg-indigo-50 rounded-lg">
+                    <h2 class="text-xl font-semibold text-indigo-800 mb-4 border-b border-indigo-200 pb-2">
+                        <i class="fas fa-user-md mr-2"></i>Información del Profesional
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="professional" class="block text-sm font-medium text-gray-700 mb-1">
+                                Profesional que digita la información
+                            </label>
+                            <input type="text" id="professional" name="professional" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="elaboration_date" class="block text-sm font-medium text-gray-700 mb-1">
+                                Fecha de elaboración
+                            </label>
+                            <input type="date" id="elaboration_date" name="elaboration_date" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="regime" class="block text-sm font-medium text-gray-700 mb-1">
+                                Régimen
+                            </label>
+                            <select id="regime" name="regime" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="">Seleccione un régimen</option>
+                                <option value="Subsidiado">Subsidiado</option>
+                                <option value="Contributivo">Contributivo</option>
+                                <option value="Especial o de Excepción">Especial o de Excepción</option>
+                                <option value="No asegurado">No asegurado</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="attention_date" class="block text-sm font-medium text-gray-700 mb-1">
+                                Fecha de atención
+                            </label>
+                            <input type="date" id="attention_date" name="attention_date" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección 2: Información del paciente -->
+                <div class="mb-8 p-4 bg-indigo-50 rounded-lg">
+                    <h2 class="text-xl font-semibold text-indigo-800 mb-4 border-b border-indigo-200 pb-2">
+                        <i class="fas fa-user-injured mr-2"></i>Información del Paciente
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="identification_type" class="block text-sm font-medium text-gray-700 mb-1">
+                                Tipo de identificación
+                            </label>
+                            <input type="text" id="identification_type" name="identification_type" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="identification_number" class="block text-sm font-medium text-gray-700 mb-1">
+                                Número de identificación
+                            </label>
+                            <input type="number" id="identification_number" name="identification_number" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="first_surname" class="block text-sm font-medium text-gray-700 mb-1">
+                                Primer apellido
+                            </label>
+                            <input type="text" id="first_surname" name="first_surname" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="second_surname" class="block text-sm font-medium text-gray-700 mb-1">
+                                Segundo apellido
+                            </label>
+                            <input type="text" id="second_surname" name="second_surname" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">
+                                Primer nombre
+                            </label>
+                            <input type="text" id="first_name" name="first_name" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="second_name" class="block text-sm font-medium text-gray-700 mb-1">
+                                Segundo nombre
+                            </label>
+                            <input type="text" id="second_name" name="second_name" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="birth_date" class="block text-sm font-medium text-gray-700 mb-1">
+                                Fecha de nacimiento
+                            </label>
+                            <input type="date" id="birth_date" name="birth_date" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">
+                                Sexo
+                            </label>
+                            <select id="gender" name="gender" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="">Seleccione el sexo</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección 3: Datos demográficos -->
+                <div class="mb-8 p-4 bg-indigo-50 rounded-lg">
+                    <h2 class="text-xl font-semibold text-indigo-800 mb-4 border-b border-indigo-200 pb-2">
+                        <i class="fas fa-globe-americas mr-2"></i>Datos Demográficos
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="population_group" class="block text-sm font-medium text-gray-700 mb-1">
+                                Grupo poblacional
+                            </label>
+                            <select id="population_group" name="population_group" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="">Seleccione grupo poblacional</option>
+                                <option value="Indigentes">Indigentes</option>
+                                <option value="Población infantil vulnerable bajo protección en instituciones diferentes a ICBF">Población infantil vulnerable bajo protección en instituciones diferentes a ICBF</option>
+                                <option value="Personas incluidas en el programa de protección a testigos">Personas incluidas en el programa de protección a testigos</option>
+                                <option value="Población en centros psiquiátricos">Población en centros psiquiátricos</option>
+                                <option value="Población rural migratoria">Población rural migratoria</option>
+                                <option value="Población en centros carcelarios">Población en centros carcelarios</option>
+                                <option value="Población rural no migratoria">Población rural no migratoria</option>
+                                <option value="Adultos mayores en centros de protección">Adultos mayores en centros de protección</option>
+                                <option value="Comunidades indígenas">Comunidades indígenas</option>
+                                <option value="Población ROM">Población ROM</option>
+                                <option value="Negro(a), mulato(a), afrocolombiano(a) o afrodescendiente">Negro(a), mulato(a), afrocolombiano(a) o afrodescendiente</option>
+                                <option value="Población infantil a cargo del ICBF">Población infantil a cargo del ICBF</option>
+                                <option value="Grupo poblacional no definido">Grupo poblacional no definido</option>
+                                <option value="Madres comunitarias">Madres comunitarias</option>
+                                <option value="Artistas, autores, compositores">Artistas, autores, compositores</option>
+                                <option value="Otro grupo poblacional">Otro grupo poblacional</option>
+                                <option value="Menores desvinculados del conflicto armado bajo protección del ICBF">Menores desvinculados del conflicto armado bajo protección del ICBF</option>
+                                <option value="Población discapacitada">Población discapacitada</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="ethnicity" class="block text-sm font-medium text-gray-700 mb-1">
+                                Pertenencia étnica
+                            </label>
+                            <select id="ethnicity" name="ethnicity" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="">Seleccione pertenencia étnica</option>
+                                <option value="1">Indígena</option>
+                                <option value="2">ROM (gitano)</option>
+                                <option value="3">Raizal (archipiélago de San Andrés y Providencia)</option>
+                                <option value="4">Palenquero de San Basilio</option>
+                                <option value="5">Negro(a), Mulato(a), Afrocolombiano(a) o Afrodescendiente</option>
+                                <option value="6">Otras Etnias</option>
+                                <option value="Z">Sin identificar por BDUA</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="country" class="block text-sm font-medium text-gray-700 mb-1">
+                                País de origen
+                            </label>
+                            <input type="text" id="country" name="country" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección 4: Ubicación y contacto -->
+                <div class="mb-8 p-4 bg-indigo-50 rounded-lg">
+                    <h2 class="text-xl font-semibold text-indigo-800 mb-4 border-b border-indigo-200 pb-2">
+                        <i class="fas fa-map-marker-alt mr-2"></i>Ubicación y Contacto
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="territorial_zone_code" class="block text-sm font-medium text-gray-700 mb-1">
+                                Código de zona territorial o residencia
+                            </label>
+                            <input type="text" id="territorial_zone_code" name="territorial_zone_code" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">
+                                Dirección
+                            </label>
+                            <input type="text" id="address" name="address" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+                                Teléfono
+                            </label>
+                            <input type="number" id="phone" name="phone" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="neighborhood" class="block text-sm font-medium text-gray-700 mb-1">
+                                Barrio / comunidad
+                            </label>
+                            <input type="text" id="neighborhood" name="neighborhood" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="microterritory" class="block text-sm font-medium text-gray-700 mb-1">
+                                Microterritorio
+                            </label>
+                            <input type="text" id="microterritory" name="microterritory" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        
+                        <div>
+                            <label for="subcode" class="block text-sm font-medium text-gray-700 mb-1">
+                                Subcódigo
+                            </label>
+                            <input type="text" id="subcode" name="subcode" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección 5: Información de la atención -->
+                <div class="mb-8 p-4 bg-indigo-50 rounded-lg">
+                    <h2 class="text-xl font-semibold text-indigo-800 mb-4 border-b border-indigo-200 pb-2">
+                        <i class="fas fa-stethoscope mr-2"></i>Información de la Atención
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="intervention_description" class="block text-sm font-medium text-gray-700 mb-1">
+                                Descripción de la intervención
+                            </label>
+                            <textarea id="intervention_description" name="intervention_description" rows="4"
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="strategy_name" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Nombre de la estrategia
+                                </label>
+                                <input type="text" id="strategy_name" name="strategy_name" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            
+                            <div>
+                                <label for="health_priority" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Prioridad en salud
+                                </label>
+                                <input type="text" id="health_priority" name="health_priority" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            
+                            <div>
+                                <label for="basic_team" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Equipo básico
+                                </label>
+                                <select id="basic_team" name="basic_team" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    <option value="">Seleccione equipo básico</option>
+                                    <option value="EBS #4">EBS #4</option>
+                                    <option value="EBS #5">EBS #5</option>
+                                    <option value="EBS #6">EBS #6</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="environment" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Entorno
+                                </label>
+                                <input type="text" id="environment" name="environment" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="observation" class="block text-sm font-medium text-gray-700 mb-1">
+                                Observación
+                            </label>
+                            <textarea id="observation" name="observation" rows="4"
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botones de acción -->
+                <div class="flex flex-col sm:flex-row justify-end gap-3 mt-8">
+                    <button type="reset" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition flex items-center justify-center">
+                        <i class="fas fa-times-circle mr-2"></i>Cancelar
+                    </button>
+                    <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                        <i class="fas fa-save mr-2"></i>Guardar Registro
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Nota sobre responsividad -->
+        <div class="mt-8 p-4 bg-white rounded-lg shadow-md">
+            <div class="flex items-start">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-mobile-alt text-indigo-600 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Formulario completamente responsive</h3>
+                    <p class="text-gray-600">Este formulario se adapta automáticamente a diferentes tamaños de pantalla. 
+                    En dispositivos móviles se muestra en una sola columna, mientras que en tablets y 
+                    escritorio se organiza en dos columnas para una mejor experiencia de usuario.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+{% block extra_js %}
+<script>
+    // Aplicar fecha actual como valor predeterminado para campos de fecha
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('elaboration_date').value = today;
+        document.getElementById('attention_date').value = today;
+        
+        // Establecer fecha de nacimiento hace 30 años por defecto
+        const birthDate = new Date();
+        birthDate.setFullYear(birthDate.getFullYear() - 30);
+        document.getElementById('birth_date').value = birthDate.toISOString().split('T')[0];
+    });
+</script>
+{% endblock %}
+
+    <script>
+        // Aplicar fecha actual como valor predeterminado para campos de fecha
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('elaboration_date').value = today;
+            document.getElementById('attention_date').value = today;
+        });
+    </script>
+</body>
+</html>

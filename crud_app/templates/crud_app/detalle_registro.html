@@ -1,0 +1,85 @@
+{% extends 'crud_app/base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Detalle del Registro #{{ registro.id }}</h1>
+    
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="bg-indigo-600 px-6 py-4">
+            <h2 class="text-xl font-bold text-white">
+                <i class="fas fa-file-medical mr-2"></i>Registro de Atención
+            </h2>
+        </div>
+        
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Columna 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-indigo-800 mb-3 border-b pb-2">
+                        <i class="fas fa-user-md mr-2"></i>Información del Profesional
+                    </h3>
+                    <div class="space-y-3">
+                        <p><strong>Profesional:</strong> {{ registro.profesional }}</p>
+                        <p><strong>Fecha Elaboración:</strong> {{ registro.fecha_elaboracion }}</p>
+                        <p><strong>Régimen:</strong> {{ registro.regimen }}</p>
+                        <p><strong>Fecha Atención:</strong> {{ registro.fecha_atencion }}</p>
+                    </div>
+                    
+                    <h3 class="text-lg font-semibold text-indigo-800 mt-6 mb-3 border-b pb-2">
+                        <i class="fas fa-user-injured mr-2"></i>Información del Paciente
+                    </h3>
+                    <div class="space-y-3">
+                        <p><strong>Nombre Completo:</strong> {{ registro.primer_nombre }} {{ registro.segundo_nombre }} {{ registro.primer_apellido }} {{ registro.segundo_apellido }}</p>
+                        <p><strong>Identificación:</strong> {{ registro.tipo_identificacion }}: {{ registro.numero_identificacion }}</p>
+                        <p><strong>Fecha Nacimiento:</strong> {{ registro.fecha_nacimiento }}</p>
+                        <p><strong>Sexo:</strong> {{ registro.sexo }}</p>
+                        <p><strong>Edad:</strong> {{ registro.edad }} años</p>
+                    </div>
+                </div>
+                
+                <!-- Columna 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-indigo-800 mb-3 border-b pb-2">
+                        <i class="fas fa-globe-americas mr-2"></i>Datos Demográficos
+                    </h3>
+                    <div class="space-y-3">
+                        <p><strong>Grupo Poblacional:</strong> {{ registro.grupo_poblacional }}</p>
+                        <p><strong>Etnia:</strong> {{ registro.get_etnia_display }}</p>
+                        <p><strong>País Origen:</strong> {{ registro.pais_origen }}</p>
+                    </div>
+                    
+                    <h3 class="text-lg font-semibold text-indigo-800 mt-6 mb-3 border-b pb-2">
+                        <i class="fas fa-map-marker-alt mr-2"></i>Ubicación
+                    </h3>
+                    <div class="space-y-3">
+                        <p><strong>Dirección:</strong> {{ registro.direccion }}</p>
+                        <p><strong>Barrio/Comunidad:</strong> {{ registro.barrio_comunidad }}</p>
+                        <p><strong>Teléfono:</strong> {{ registro.telefono }}</p>
+                        <p><strong>Microterritorio:</strong> {{ registro.microterritorio }}</p>
+                        <p><strong>Subcódigo:</strong> {{ registro.subcodigo }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-indigo-800 mt-8 mb-3 border-b pb-2">
+                <i class="fas fa-stethoscope mr-2"></i>Detalles de la Atención
+            </h3>
+            <div class="space-y-4">
+                <p><strong>Descripción Intervención:</strong> {{ registro.descripcion_intervencion }}</p>
+                <p><strong>Estrategia:</strong> {{ registro.nombre_estrategia }}</p>
+                <p><strong>Prioridad Salud:</strong> {{ registro.prioridad_salud }}</p>
+                <p><strong>Equipo Básico:</strong> {{ registro.equipo_basico }}</p>
+                <p><strong>Entorno:</strong> {{ registro.entorno }}</p>
+                <p><strong>Observación:</strong> {{ registro.observacion|default:"Ninguna" }}</p>
+            </div>
+            
+            <div class="mt-8 flex justify-between items-center">
+                <p class="text-sm text-gray-500">Creado: {{ registro.creado_en }} | Actualizado: {{ registro.actualizado_en }}</p>
+                <a href="{% url 'lista_registros' %}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver a la lista
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

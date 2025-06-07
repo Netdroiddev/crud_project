@@ -1,0 +1,129 @@
+Acontinuacion implementa estos campos y elimina los anteriores y haz el basboard full responsive ; 
+
+
+PROFESIONAL QUE DIGITA LA INFORMACION 
+FEHA DE ELABORACION
+FEHA DE ELABORACION
+REGIMEN opciones que da ; SUBSIDIADO , CONTRIBUTIVO , ESPECIAL O DE EXCEPCION , NO ASEGURADO ,
+FECHA DE ATENCION
+TIPO DE IDENTIFICACION
+NUMERO DE IDENTIFICACION
+PRIMER APELLIDO
+SEGUNDO APELLIDO
+PRIMER NOMBRE
+SEGUNDO NOMBRE
+FECHA DE NACIMIENTO
+SEXO
+GRUPO POBLACIONAL DE AQUI SE PUEDE ELEGIR ESO 
+
+Indigentes
+
+Población infantil vulnerable bajo protección en instituc diferentes a ICBF
+
+Personas incluidas en el programa de protección a testigos
+
+Población en centros psiquiátricos
+
+Población rural migratoria
+
+Población en centros carcelarios
+
+Población rural no migratoria
+
+Adultos mayores en centros de protección
+
+Comunidades indígenas
+
+Población ROM
+
+Negro(a) o mulato(a) o afrocolombiano(a) o afrodescendiente
+
+Poblacion infantil a cargo del ICBF
+
+Grupo poblacional no definido
+
+Madres comunitarias
+
+Artistas, autores, compositores
+
+Otro grupo poblacional
+
+Menores desvinculados del conflicto armado bajo proteccion del ICBF
+
+Población discapacitada
+
+
+PERTENENCIA ETNICA 
+
+Elegir
+
+1 Indígena
+
+2 ROM (gitano)
+
+3 Raizal (archipiélago de San Andrés y Providencia)
+
+4 Palenquero de San Basilio
+
+5 Negro(a), Mulato(a), Afrocolombiano(a) o Afrodescendiente
+
+6 Otras Etnias
+
+Z Sin Identificar por BDUA
+
+
+PAIS DE ORIGEN
+
+CODIGO DE ZONA TERRITORIAL O RESIDENCIA
+
+DIRECCION
+
+TELEFONO
+
+BARRIO / COMUNIDAD
+
+MICROTERRITORIO
+
+SUBCODIGO
+
+DESCRIPCION DE LA INTERVENCION 
+
+NOMBRE DE LA ESTRATEGIA
+
+PRIORIDAD EN SALUD
+
+
+EQUIPO BASICO
+
+ELEGIR ; EBS #4 , EBS #5 EBS #6
+
+
+ENTORNO
+
+OBSERVACION
+
+
+
+Estoy desarrollando una funcionalidad en Django para registrar atenciones clínicas. Ya está en desarrollo y la lógica del backend funciona. Estoy usando AJAX para enviar los datos mediante HTTP POST (sin recargar la página) y quiero que los datos se almacenen en la base de datos correctamente a través de un Form validado.
+
+Esta es mi vista actual en Django:
+si esta mal corriguela ; 
+def registro_atencion(request):
+    if request.method == 'POST':
+        form = RegistroAtencionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('exito')  # Asegúrate de tener una URL llamada 'exito'
+    else:
+        form = RegistroAtencionForm()
+
+
+✅ El formulario se guarda correctamente con form.save(), pero quiero:
+
+Que el guardado sea mediante AJAX (fetch o jQuery) sin redirección.
+
+Que el backend retorne un HttpResponse (JSON) con estado success o error y se muestre una alerta.
+
+Una respuesta visual en el frontend sin recargar la página.
+
+Que los datos sigan guardándose en la base de datos.
